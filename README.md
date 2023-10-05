@@ -1,19 +1,8 @@
-# Autohotkey ChatGPT
+# Wisper Autohotkey Paste
 
-Use your voice to control Windows 📢
+Voice type anywhere in Windows using OpenAI's Whisper Speech Recognition engine.
 
-| You say                    | Windows does                                     |
-| -------------------------- | ------------------------------------------------ |
-| Open Firefox               | Opens Firefox                                    |
-| Search for cupcake recipes | Opens browser and searches for 'Cupcake Recipes' |
-| Tell me the first 20 digits of Pi                            | Shows a window with the 20 first digits of Pi                                                 |
-| Paste a poem | Pastes a poem |
-
-⚠ WARNING ⚠ This is an experimental application. ChatGPT can end up doing random stuff. So please use with caution!
-
-## How does this work?
-
-Check out my blog post: TBD
+(This is a fork of mxro/autohotkey-chatgpt-voice, I modified it to allow just voice typing instead of carrying out commands.)
 
 ## Install
 
@@ -39,25 +28,14 @@ Check out my blog post: TBD
 
 ## Customise
 
+Edit transcriptionPrompt.txt to customize the transcription.
+
 ### Trigger Hotkey
 
 The hotkey to start/stop a voice command is defined in `watch.ahk`. You can replace the following with a hotkey of your choice:
 
 ```
 F8::
-```
-
-### Prompt
-
-Among the extracted files, there is a `prompt.txt`. You can edit this to customise it to yor own needs.
-
-For instance, the current prompt file defaults to using the [DuckDuckGo](https://duckduckgo.com/) search engine. You can change this easily to any search engine you like, by modifying the following line in `prompt.txt`:
-
-```
-Unless otherwise specified, assume:
-...
-- the default search engine is DuckDuckGo
-...
 ```
 
 ## Prior Art

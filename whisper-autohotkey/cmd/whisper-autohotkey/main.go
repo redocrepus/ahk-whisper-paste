@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 )
 
 type Config struct {
@@ -13,7 +14,28 @@ type Config struct {
 	AutoHotKeyExec string
 }
 
+// This function writes a given text to the clipboard using Windows' `clip` command
+func writeTextToClipboard(text string) error {
+	cmd := exec.Command("cmd", "/c", "echo|set /p="+text+"| clip")
+	err := cmd.Run()
+	return err
+}
+
 func main() {
+
+	/*
+		// Open a file for logging
+		logFile, e := os.OpenFile("log.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if e != nil {
+			panic(e)
+		}
+		defer logFile.Close()
+
+		// Set the log output to the file
+		log.SetOutput(logFile)
+	*/
+
+	// log.Println("Starting whisper-autohotkey")
 	err := assertThatConfigFileExists()
 	if err != nil {
 		log.Fatal("Error when creating config file: ", err)
@@ -54,18 +76,39 @@ func main() {
 	}
 
 	log.Println("Prompt:\n  " + text)
-	command, err := BuildCommand(config, text)
+
+	err = writeTextToClipboard(text)
 	if err != nil {
-		log.Fatal("Cannot interpret prompt", err)
-		return
+		log.Fatal("Failed to write text to clipboard:", err)
 	}
 
-	fmt.Println("Running:\n  " + command)
-	output, err := RunCommand(config, command)
+	log.Println("Text copied to clipboard")
+
+	ahkScript := `Send, ^v ; Ctrl+V for paste
+ExitApp ; Exit after executing
+`
+
+	// Assuming you have AutoHotKey installed and `paste.ahk` is in the same directory.
+	_, err = RunCommand(config, ahkScript)
 	if err != nil {
-		log.Fatal("Cannot run command", err)
+		log.Fatal("Cannot run AutoHotKey command", err)
 	}
-	log.Println("Output:\n  " + output)
+
+	/*
+		log.Println("Prompt:\n  " + text)
+		command, err := BuildCommand(config, text)
+		if err != nil {
+			log.Fatal("Cannot interpret prompt", err)
+			return
+		}
+
+		fmt.Println("Running:\n  " + command)
+		output, err := RunCommand(config, command)
+		if err != nil {
+			log.Fatal("Cannot run command", err)
+		}
+		log.Println("Output:\n  " + output)
+	*/
 }
 
 func readConfigFile() ([]byte, error) {
