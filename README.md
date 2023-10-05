@@ -7,9 +7,10 @@ This project allows you dictating anywhere in Windows using OpenAI's Whisper spe
 
 ## Install
 
+I have to update this section to match the current fork...
+
 - Download and install AutoHotKey V1 from [autohotkey.com](https://www.autohotkey.com/)
-- Download `AutoHotKey-ChatGPT.zip` from the [Releases](https://github.com/mxro/autohotkey-chatgpt-voice/releases) for the latest release.
-- Extract `AutoHotKey-ChatGPT.zip`
+- TBD
 - Edit `config.json` from the extracted files. Provide your [Open API Key](https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/) for the property `OpenapiKey`.
 
 ```json
