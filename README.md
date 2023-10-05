@@ -1,6 +1,7 @@
 # Wisper Autohotkey Paste
 
-Voice type anywhere in Windows using OpenAI's Whisper Speech Recognition engine.
+Voice type anywhere in Windows using OpenAI's Whisper Speech Recognition engine!
+This project allows you dictating anywhere in Windows using OpenAI's Whisper speech-to-text engine.
 
 (This is a fork of mxro/autohotkey-chatgpt-voice, I modified it to allow just voice typing instead of carrying out commands.)
 
@@ -22,7 +23,7 @@ Voice type anywhere in Windows using OpenAI's Whisper Speech Recognition engine.
 
 - Double click on `watch.ahk` from the extracted files
 - Press F8
-- Speak into your microphone what you would like to do
+- Say whatever you want to type
 - Press F8
 - Wait for Open AI and AutoHotKey to do their magic
 
