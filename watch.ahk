@@ -1,4 +1,4 @@
-﻿Launch_App2::
+﻿F8::
   NotRecording := !NotRecording
   If NotRecording
   {
