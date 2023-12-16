@@ -30,7 +30,8 @@ I have to update this section to match the current fork...
 
 ## Customise
 
-Edit transcriptionPrompt.txt to customize the transcription.
+- Edit transcriptionPrompt.txt to customize the transcription.
+- Add multiple transcription prompt and .ahk files. For example, you can have multiple activation keys for multiple languages.
 
 ### Trigger Hotkey
 
