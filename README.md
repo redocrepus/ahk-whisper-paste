@@ -28,11 +28,6 @@ I have to update this section to match the current fork...
 - Press F8
 - Wait for Open AI and AutoHotKey to do their magic
 
-## Customise
-
-- Edit transcriptionPrompt.txt to customize the transcription.
-- Add multiple transcription prompt and .ahk files. For example, you can have multiple activation keys for multiple languages.
-
 ### Trigger Hotkey
 
 The hotkey to start/stop a voice command is defined in `watch.ahk`. You can replace the following with a hotkey of your choice:
@@ -40,6 +35,11 @@ The hotkey to start/stop a voice command is defined in `watch.ahk`. You can repl
 ```
 F8::
 ```
+
+## Customise
+
+- Edit transcriptionPrompt.txt to customize the transcription.
+- Add multiple transcription prompt and .ahk files. For example, you can have multiple Trigger Hotkeys for different languages or contexts.
 
 ## Prior Art
 
