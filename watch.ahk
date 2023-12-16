@@ -1,5 +1,4 @@
-﻿
-F8::
+﻿Launch_App2::
   NotRecording := !NotRecording
   If NotRecording
   {
@@ -8,8 +7,9 @@ F8::
   Else
   {  
     Run %A_WorkingDir%\bin\fmedia-1.31-windows-x64\fmedia\fmedia.exe --globcmd=stop,, Hide
-    Sleep, 100
-    Run %A_WorkingDir%\bin\whisper-autohotkey\whisper-autohotkey.exe,, Hide
+    Sleep, 200
+    Run %A_WorkingDir%\bin\whisper-autohotkey\whisper-autohotkey.exe en transtriptionPrompt.txt,, Hide
   }
   return
 
+  

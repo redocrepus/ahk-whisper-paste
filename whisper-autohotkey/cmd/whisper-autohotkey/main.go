@@ -23,19 +23,19 @@ func writeTextToClipboard(text string) error {
 
 func main() {
 
-	/*
-		// Open a file for logging
-		logFile, e := os.OpenFile("log.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-		if e != nil {
-			panic(e)
-		}
-		defer logFile.Close()
+	// Open a file for logging
+	logFile, e := os.OpenFile("log.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if e != nil {
+		panic(e)
+	}
+	defer logFile.Close()
 
-		// Set the log output to the file
-		log.SetOutput(logFile)
-	*/
-
-	// log.Println("Starting whisper-autohotkey")
+	// Set the log output to the file
+	log.SetOutput(logFile)
+	log.Println("")
+	log.Println("")
+	log.Println("========================================")
+	log.Println("Starting whisper-autohotkey")
 	err := assertThatConfigFileExists()
 	if err != nil {
 		log.Fatal("Error when creating config file: ", err)
@@ -56,18 +56,18 @@ func main() {
 		log.Fatal("Please provide your OpenAI key in the file config.json")
 	}
 
-	argLength := len(os.Args[1:])
+	// argLength := len(os.Args[1:])
 	inputFileName := "rec.mp3"
-	if argLength > 0 {
-		inputFileName = os.Args[1:][0]
-		log.Println("Processing file " + inputFileName)
-		stats, err := os.Stat(inputFileName)
-		if errors.Is(err, os.ErrNotExist) {
-			log.Fatal("Input file does not exist")
-		} else {
-			log.Printf("File size %v", stats.Size())
-		}
-	}
+	// if argLength > 1 {
+	// 	inputFileName = os.Args[1:][1]
+	// 	log.Println("Processing file " + inputFileName)
+	// 	stats, err := os.Stat(inputFileName)
+	// 	if errors.Is(err, os.ErrNotExist) {
+	// 		log.Fatal("Input file does not exist")
+	// 	} else {
+	// 		log.Printf("File size %v", stats.Size())
+	// 	}
+	// }
 
 	text, err := Transcribe(inputFileName, config)
 	if err != nil {
