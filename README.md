@@ -11,7 +11,7 @@ I have to update this section to match the current fork...
 
 - Download and install AutoHotKey V1 from [autohotkey.com](https://www.autohotkey.com/)
 - TBD
-- Edit `config.json` from the extracted files. Provide your [Open API Key](https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/) for the property `OpenapiKey`.
+- Copy `config.template.json` to your own `config.json`, and edit it to provide your [Open API Key](https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/) for the property `OpenapiKey`.
 
 ```json
 {
