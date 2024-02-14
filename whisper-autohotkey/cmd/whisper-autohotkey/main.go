@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
 	"unicode"
+	"unicode/utf16"
 )
 
 type Config struct {
@@ -17,11 +19,44 @@ type Config struct {
 	Coding         bool
 }
 
-// This function writes a given text to the clipboard using Windows' `clip` command
 func writeTextToClipboard(text string) error {
-	cmd := exec.Command("cmd", "/c", "echo|set /p="+text+"| clip")
-	err := cmd.Run()
-	return err
+	// Create a temporary file
+	tmpFile, err := ioutil.TempFile("", "clip")
+	if err != nil {
+		return err
+	}
+	defer os.Remove(tmpFile.Name()) // Clean up the file after we're done
+
+	// Convert the string to UTF-16LE and write it to the temporary file
+	utf16leBytes := utf16leEncode(text)
+	if _, err = tmpFile.Write(utf16leBytes); err != nil {
+		return err
+	}
+	if err = tmpFile.Close(); err != nil {
+		return err
+	}
+
+	// Use clip to copy the contents of the file to the clipboard
+	cmd := exec.Command("cmd", "/c", "clip < "+tmpFile.Name())
+	return cmd.Run()
+}
+
+// utf16leEncode encodes a string in UTF-16LE with a Byte Order Mark (BOM)
+func utf16leEncode(s string) []byte {
+	// Encode the string as UTF-16LE
+	encoded := utf16.Encode([]rune(s))
+
+	// Prepend the BOM
+	bom := []uint16{0xFEFF}
+	encoded = append(bom, encoded...)
+
+	// Convert uint16 slice to byte slice
+	b := make([]byte, 2*len(encoded))
+	for i, runeValue := range encoded {
+		b[2*i] = byte(runeValue)
+		b[2*i+1] = byte(runeValue >> 8)
+	}
+	return b
 }
 
 func toSnakeCase(text string) string {
