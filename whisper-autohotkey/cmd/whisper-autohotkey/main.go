@@ -27,8 +27,11 @@ func writeTextToClipboard(text string) error {
 	}
 	defer os.Remove(tmpFile.Name()) // Clean up the file after we're done
 
-	// Convert the string to UTF-16LE and write it to the temporary file
 	utf16leBytes := utf16leEncode(text)
+	// Omit the BOM as it may cause issues with some programs
+	if len(utf16leBytes) >= 2 {
+		utf16leBytes = utf16leBytes[2:]
+	}
 	if _, err = tmpFile.Write(utf16leBytes); err != nil {
 		return err
 	}
@@ -37,8 +40,8 @@ func writeTextToClipboard(text string) error {
 	}
 
 	// Use clip to copy the contents of the file to the clipboard
-	cmd := exec.Command("cmd", "/c", "clip < "+tmpFile.Name())
-	return cmd.Run()
+	clipCmd := exec.Command("cmd", "/c", fmt.Sprintf("type %s | clip", tmpFile.Name()))
+	return clipCmd.Run()
 }
 
 // utf16leEncode encodes a string in UTF-16LE with a Byte Order Mark (BOM)
