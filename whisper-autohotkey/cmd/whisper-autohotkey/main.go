@@ -233,7 +233,7 @@ func main() {
 
 	log.Println("Text copied to clipboard")
 
-	ahkScript := `Send, ^v ; Ctrl+V for paste
+	ahkScript := `Send, +{Insert} ; Shift+Insert for paste
 ExitApp ; Exit after executing
 `
 
