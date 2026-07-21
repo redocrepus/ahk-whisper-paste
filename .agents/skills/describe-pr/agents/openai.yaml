@@ -1,0 +1,4 @@
+interface:
+  display_name: "Describe PR"
+  short_description: "Generate PR title and concise change summary. Maintain PR title rules."
+  default_prompt: "Describe this PR with title and concise bullets grouped by logical change clusters. Maintain PR title rules."
