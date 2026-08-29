@@ -14,9 +14,27 @@ import (
 )
 
 type Config struct {
-	OpenapiKey     string
-	AutoHotKeyExec string
-	Coding         bool
+	OpenapiKey        string
+	AutoHotKeyExec    string
+	Coding            bool
+	StripNonAsciiEnds *bool
+}
+
+// shouldStripNonASCIIEnds resolves the cleanup default from the transcription
+// language unless the user has explicitly configured an override.
+func shouldStripNonASCIIEnds(language string, configured *bool) bool {
+	if configured != nil {
+		return *configured
+	}
+	return strings.EqualFold(language, "en")
+}
+
+// stripNonASCIIEnds removes leading and trailing runes outside printable ASCII.
+// It preserves all characters between the first and last printable ASCII rune.
+func stripNonASCIIEnds(text string) string {
+	return strings.TrimFunc(text, func(r rune) bool {
+		return r < ' ' || r > '~'
+	})
 }
 
 func writeTextToClipboard(text string) error {

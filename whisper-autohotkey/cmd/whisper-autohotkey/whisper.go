@@ -53,5 +53,10 @@ func Transcribe(inputFileName string, config Config) (string, error) {
 		return "", err
 	}
 
-	return response.Text, nil
+	text := response.Text
+	if shouldStripNonASCIIEnds(languageSymbol, config.StripNonAsciiEnds) {
+		text = stripNonASCIIEnds(text)
+	}
+
+	return text, nil
 }

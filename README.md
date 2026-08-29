@@ -16,9 +16,19 @@ I have to update this section to match the current fork...
 ```json
 {
   "OpenapiKey": "",
-  "AutoHotKeyExec": ".\\bin\\autohotkey-1.1.37.01\\AutoHotkeyU64.exe"
+  "AutoHotKeyExec": ".\\bin\\autohotkey-1.1.37.01\\AutoHotkeyU64.exe",
+  "StripNonAsciiEnds": null
 }
 ```
+
+### Transcription cleanup
+
+`StripNonAsciiEnds` removes non-printable-ASCII characters from only the start
+and end of a transcription. Characters inside the transcription are unchanged.
+
+- `null` or omitted: enabled for English (`en`) transcription and disabled for other languages.
+- `true`: always enable cleanup.
+- `false`: always disable cleanup.
 
 ## Usage
 
